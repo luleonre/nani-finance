@@ -1,6 +1,10 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const defaultUrl = 'https://hlvxzarxrwcvatnlfhub.supabase.co';
+const defaultKey = 'placeholder-key';
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+// Limpiar espacios y comillas accidentales
+const cleanUrl = (import.meta.env.VITE_SUPABASE_URL || defaultUrl).trim().replace(/^["']|["']$/g, '');
+const cleanKey = (import.meta.env.VITE_SUPABASE_ANON_KEY || defaultKey).trim().replace(/^["']|["']$/g, '');
+
+export const supabase = createClient(cleanUrl, cleanKey);
